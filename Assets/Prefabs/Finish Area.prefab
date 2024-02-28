@@ -9654,6 +9654,7 @@ GameObject:
   - component: {fileID: 7963378226730086979}
   - component: {fileID: 7963378226730086978}
   - component: {fileID: 7963378226730086977}
+  - component: {fileID: 8966766628272808697}
   m_Layer: 0
   m_Name: Finish Area
   m_TagString: EndGame
@@ -9744,6 +9745,18 @@ CapsuleCollider:
   m_Height: 3.9600067
   m_Direction: 1
   m_Center: {x: 0, y: 0.5526118, z: -0.00000011920929}
+--- !u!114 &8966766628272808697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963378226730086990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692b31d828a7515468cd489cf1d33cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7963378227104761752
 GameObject:
   m_ObjectHideFlags: 0

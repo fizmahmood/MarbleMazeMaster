@@ -15,6 +15,8 @@ public class MarbleController : MonoBehaviour
     [SerializeField] private float maxAngularVelocity = 25; // Maximum angular velocity for the ball's rotation
     [SerializeField] private float jumpPower = 2; 
     [SerializeField] private GameObject crown;           // Force added to the ball when jumping
+    [SerializeField] private AudioSource coinSound;
+    [SerializeField] private AudioSource deathSound;
 
     // Ground detection parameters
     private const float groundRayLength = 1f; // Length of the ray to check if the ball is grounded
@@ -60,11 +62,16 @@ public class MarbleController : MonoBehaviour
             move = (verticalInput * Vector3.forward + horizontalInput * Vector3.right).normalized;
         }
 
-        if(transform.position.y < 3f){
+        if(transform.position.y < 2f){
 
             Debug.Log("Game Over: You fell to your death");
 
             if(!GameManager.Instance.gameHasEnded){
+                
+                deathSound.Play();
+
+                GetComponent<MeshRenderer>().material.color = Color.black;
+                crown.SetActive(false);
 
                 GameManager.Instance.gameHasEnded = true;
                 GameManager.Instance.GameOverRestart();
@@ -105,6 +112,7 @@ public class MarbleController : MonoBehaviour
         if (other.collider.CompareTag("Obstacle") || other.collider.CompareTag("Enemy"))
         {
             Debug.Log("Game Over: You hit an obstacle");
+            deathSound.Play();
 
             GetComponent<MeshRenderer>().material.color = Color.black;
             crown.SetActive(false);
@@ -118,20 +126,12 @@ public class MarbleController : MonoBehaviour
         if (other.CompareTag("Coin"))
         {
             Debug.Log("Jackpot! You collected a coin");
+            coinSound.Play();
 
             GameObject coin = other.gameObject;
 
             DisableCoin(coin);
             GameManager.Instance.AddPoint();
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("EndGame"))
-        {
-            Debug.Log("Congratulations! You completed the maze");
-            GameManager.Instance.GameCompleted();
         }
     }
     

@@ -11,7 +11,7 @@ public class EnemyMarbleController : MonoBehaviour
     void Start()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
-        target = GameManager.Instance.PlayerController.transform;
+        target = GameManager.Instance.playerController.transform;
     }
 
     // Update is called once per frame
