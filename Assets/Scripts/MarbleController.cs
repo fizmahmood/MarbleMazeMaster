@@ -13,12 +13,13 @@ public class MarbleController : MonoBehaviour
     [SerializeField] private float movePower = 5;           // Force added to the ball for movement
     [SerializeField] private bool useTorque = true;         // Whether to use torque for ball rotation
     [SerializeField] private float maxAngularVelocity = 25; // Maximum angular velocity for the ball's rotation
-    [SerializeField] private float jumpPower = 2;           // Force added to the ball when jumping
+    [SerializeField] private float jumpPower = 2; 
+    [SerializeField] private GameObject crown;           // Force added to the ball when jumping
 
     // Ground detection parameters
     private const float groundRayLength = 1f; // Length of the ray to check if the ball is grounded
 
-    private Rigidbody rigidbody;
+    public Rigidbody rigidbody;
 
     private void Awake()
     {
@@ -31,9 +32,13 @@ public class MarbleController : MonoBehaviour
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponentInChildren<Rigidbody>();
         // Set the maximum angular velocity for the ball
         rigidbody.maxAngularVelocity = maxAngularVelocity;
+
+        GetComponent<MeshRenderer>().material.color = Color.white;
+
+        crown.SetActive(true);
     }
 
     private void Update()
@@ -58,7 +63,13 @@ public class MarbleController : MonoBehaviour
         if(transform.position.y < 3f){
 
             Debug.Log("Game Over: You fell to your death");
-            GameManager.Instance.EndGame();
+
+            if(!GameManager.Instance.gameHasEnded){
+
+                GameManager.Instance.gameHasEnded = true;
+                GameManager.Instance.GameOverRestart();
+            }
+            
         }
     }
 
@@ -91,10 +102,13 @@ public class MarbleController : MonoBehaviour
     // Handle collisions with obstacles
     void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("Obstacle"))
+        if (other.collider.CompareTag("Obstacle") || other.collider.CompareTag("Enemy"))
         {
             Debug.Log("Game Over: You hit an obstacle");
-            GameManager.Instance.EndGame();
+
+            GetComponent<MeshRenderer>().material.color = Color.black;
+            crown.SetActive(false);
+            GameManager.Instance.GameOverRestart();
         }
     }
 
@@ -112,6 +126,15 @@ public class MarbleController : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("EndGame"))
+        {
+            Debug.Log("Congratulations! You completed the maze");
+            GameManager.Instance.GameCompleted();
+        }
+    }
+    
     // Disable the collected coin
     private void DisableCoin(GameObject coin)
     {

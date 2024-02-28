@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8012908018844338954, guid: 5cbdf7f3ee07b344281eb23d70258bcb, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 5cbdf7f3ee07b344281eb23d70258bcb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -101,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5cbdf7f3ee07b344281eb23d70258bcb, type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5cbdf7f3ee07b344281eb23d70258bcb, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -138,3 +142,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1841833001591316917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8012908018844338954, guid: 5cbdf7f3ee07b344281eb23d70258bcb, type: 3}
+  m_PrefabInstance: {fileID: 667640808523322691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5869142411530821662
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841833001591316917}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3772397018125416779, guid: 5cbdf7f3ee07b344281eb23d70258bcb, type: 3}
